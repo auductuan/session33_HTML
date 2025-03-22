@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 400px;
+            margin: 20px;
+        }
+        select, button {
+            padding: 5px;
+            font-size: 16px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <select id="select">
+            <option value="all">-- Chọn danh mục --</option>
+            <option value="Đồ ăn">Đồ ăn</option>
+            <option value="Nước">Nước</option>
+            <option value="Dụng cụ">Dụng cụ</option>
+        </select>
+        <button onclick="filterProducts()">Lọc</button>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        let dishes = [
+            { name: 'Rau sạch', category: 'Đồ ăn' },
+            { name: 'Thịt lợn', category: 'Đồ ăn' },
+            { name: 'Pepsi không calo', category: 'Nước' },
+            { name: 'Cocacola', category: 'Nước' },
+            { name: 'Cờ lê', category: 'Dụng cụ' },
+            { name: 'Tuy vít', category: 'Dụng cụ' }
+        ];
+
+        function filterProducts() {
+            let selectedCategory = document.getElementById("select").value;
+            let list = document.getElementById("list");
+            list.innerHTML = "";
+            
+            let filteredDishes = dishes.filter(dish => selectedCategory === "all" || dish.category === selectedCategory);
+            
+            filteredDishes.forEach(dish => {
+                let li = document.createElement("li");
+                li.innerHTML = `<b>Tên đồ ăn:</b> ${dish.name} - <b>Danh mục:</b> ${dish.category}`;
+                list.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
