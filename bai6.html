@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+        }
+        input {
+            width: 70%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .weather-container {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .icon {
+            font-size: 50px;
+        }
+        .temperature {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .description {
+            font-size: 18px;
+            color: #666;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ứng dụng Thời tiết</h1>
+        <input type="text" id="city" placeholder="Nhập tên thành phố">
+        <button onclick="getWeather()">Tìm kiếm</button>
+        <div id="result" class="weather-container"></div>
+        <div class="footer">
+            <p>Thông tin thời tiết cập nhật</p>
+            <div class="icon">☀</div>
+        </div>
+    </div>
+
+    <script>
+        const weatherData = {
+            "Hà Nội": { temperature: 25, humidity: 70, windSpeed: 5, description: "Có mây", icon: "⛅" },
+            "Hồ Chí Minh": { temperature: 32, humidity: 75, windSpeed: 7, description: "Nắng", icon: "☀" },
+            "Đà Nẵng": { temperature: 28, humidity: 82, windSpeed: 12, description: "Mưa rào", icon: "☔" }
+        };
+
+        function getWeather() {
+            let city = document.getElementById("city").value.trim();
+            let resultDiv = document.getElementById("result");
+            
+            if (weatherData[city]) {
+                let data = weatherData[city];
+                resultDiv.innerHTML = `
+                    <h2>${city}</h2>
+                    <div class="icon">${data.icon}</div>
+                    <p class="temperature">${data.temperature !== undefined ? data.temperature + '°C' : 'Không có dữ liệu nhiệt độ'}</p>
+                    <p class="description">${data.description}</p>
+                    <p>Độ ẩm: ${data.humidity}%</p>
+                    <p>Tốc độ gió: ${data.windSpeed} km/h</p>
+                `;
+            } else {
+                resultDiv.innerHTML = `<p>Không tìm thấy thông tin thời tiết cho thành phố này!</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
